@@ -1,6 +1,15 @@
 <?php
 include_once 'db_connect.php';
 $id=$_GET['updateId'];
+$sql="SELECT * FROM `crud_operation` WHERE id=$id";
+$query=$dbh->prepare($sql);
+$result=$query->execute();
+$row=$query->fetch(PDO::FETCH_ASSOC);
+          $name=$row['name'];
+          $email=$row['email'];
+          $phone=$row['phone'];
+          $password=$row['password'];
+
 
 if(isset($_POST['submit'])){
     $name=$_POST['name'];
@@ -48,19 +57,19 @@ if(isset($_POST['submit'])){
         <form method="post">
             <div class="form-group mb-3">
                 <label for="name" class="form-label">Name</label>
-                <input type="text" placeholder="Enter your name" class="form-control" name="name" autocapitalize="none">
+                <input type="text" placeholder="Enter your name" class="form-control" name="name" autocapitalize="none" value=<?php echo $name?>>
             </div>
             <div class="form-group mb-3">
                 <label for="email" class="form-label">Email</label>
-                <input type="email" placeholder="Enter your email" class="form-control" name="email">
+                <input type="email" placeholder="Enter your email" class="form-control" name="email" value=<?php echo $email?>>
             </div>
             <div class="form-group mb-3">
                 <label for="phone" class="form-label">Phone Number</label>
-                <input type="text"  placeholder="Enter your phone number" class="form-control" name="phone">
+                <input type="text"  placeholder="Enter your phone number" class="form-control" name="phone" value=<?php echo $phone?>>
             </div>
             <div class="form-group mb-3">
                 <label for="Password" class="form-label">Password</label>
-                <input type="password"   placeholder="Enter your password" class="form-control" name="password">
+                <input type="password"   placeholder="Enter your password" class="form-control" name="password" value=<?php echo $password?>>
             </div>
             <!-- <input type="submit" class="btn btn-primary" name="submit" value="Submit"> -->
 
